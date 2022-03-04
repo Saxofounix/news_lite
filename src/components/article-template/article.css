@@ -1,0 +1,44 @@
+.article img {
+  height: auto;
+  width: 100%;
+}
+.article > p,
+h2,
+img {
+  margin-top: 1rem;
+  line-height: 2rem;
+}
+
+img {
+  object-fit: cover;
+  max-height: 70vh;
+  width: auto;
+}
+
+.element {
+  display: none;
+}
+
+.gu-image {
+  /* max-height: 70vh; */
+  height: 100%;
+  width: 250px;
+}
+
+.article a {
+  text-decoration: none;
+}
+
+.article ul {
+  list-style-type: none;
+}
+.article p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+span {
+  /* display: inline; */
+  /* margin-bottom: 0.25rem; */
+  font-size: 0.75rem;
+}

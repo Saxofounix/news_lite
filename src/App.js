@@ -1,24 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import Navbar from "./components/navBar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./components/home-page";
+import Article from "./components/article-template";
+import HomeArticles from "./components/article-pages";
+import Footer from "./components/footer";
 
 function App() {
+  const [page, setPage] = useState(() => {
+    const saved = sessionStorage.getItem("page");
+    const initialValue = JSON.parse(saved);
+    return initialValue || 1;
+  });
+
+  const [activeIndex, setActiveIndex] = useState(() => {
+    const saved = sessionStorage.getItem("index");
+    const initialValue = JSON.parse(saved);
+    return initialValue || 0;
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Navbar setPage={setPage} setActiveIndex={setActiveIndex} />
+        <Switch>
+          <Route exact path="/">
+            <Home
+              page={page}
+              setPage={setPage}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+            />
+          </Route>
+
+          <Route path="/section/:section">
+            <HomeArticles
+              page={page}
+              setPage={setPage}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+            />
+          </Route>
+
+          <Route path="/:id">
+            <Article />
+          </Route>
+        </Switch>
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 }
 
